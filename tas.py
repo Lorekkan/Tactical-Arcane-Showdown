@@ -32,12 +32,14 @@ class Player():
     def gainStamina(self, amount):
         self.stamina += amount
 
-    def updateRoundWin(self, match):
+    def roundEndUpdate(self, match):
         self.roundWin += 1
         if (self.roundWin == match.roundsToWin):
             self.matchWin += 1
             match.player1.roundWin = 0
             match.player2.roundWin = 0
+        match.player1.refreshStats()
+        match.player2.refreshStats()
     
     def proposeThreeElements(self, el1, el2, el3):
         self.proposedElements = (el1, el2, el3)
@@ -59,7 +61,7 @@ class Player():
             else:
                 self.powerUpElements.append(self.proposedElements[i])
 
-    def updateHealth(self, amount):
+    def updateHP(self, amount):
         self.HP += amount
 
     def updateArmor(self, amount):
@@ -81,6 +83,31 @@ class Match():
         self.player1 = player1
         self.player2 = player2
         self.roundsToWin = roundsToWin
+
+        def resolvePowerUps():
+            pass
+
+        def resolveHPChanges(self):
+            p1Index = elements.index(self.player1.chosenElement)
+            p2Index = elements.index(self.player2.chosenElement)
+            point = pointTable[9*p1Index + p2Index]
+            resolvePowerUps()
+            if point == 0:
+                pass
+            elif point > 0:
+                self.player2.updateHP(-point)
+            else:
+                self.player1.updateHP(point)
+            
+            if self.player1.HP <= 0 or self.player2.HP <= 0:
+                roundEndUpdate()
+
+        def roundEndUpdate(self):
+            self.player1.roundEndUpdate()
+            self.player2.roundEndUpdate()
+            self.player1.refreshStats()
+            self.player1.refreshStats()
+
 
 
 def tacticalArcaneShowdown():
