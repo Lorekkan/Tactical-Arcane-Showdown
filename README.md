@@ -25,6 +25,7 @@ After following these steps the game should start running. Have fun!
  # All 36 Unique Elemental Power Ups
  Fire-Water: Boiling Point
  Apply Boiling to your enemy. Player with the Boiling chooses their 3 elements before and those elements are shown to their enemy.
+ 
  Fire-Wind: Drought
  Remove all the buffs from your enemy.
  Fire-Nature: Forest Fire
